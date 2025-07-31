@@ -5,6 +5,9 @@ venv/
 __pycache__/
 *.pyc
 
+# Data folder
+data/
+
 # IDE and editor folders
 .vscode/
 .idea/

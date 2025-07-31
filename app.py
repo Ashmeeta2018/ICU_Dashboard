@@ -38,7 +38,7 @@ def get_data():
         acuity_filter = request.args.get('acuity_level')
         admission_filter = request.args.get('admission_source')
 
-        df_full = pd.read_csv('icu_data.csv')
+        df_full = pd.read_csv('data/icu_data.csv')
         df_full['Date'] = pd.to_datetime(df_full['Date'])
 
         # --- Apply Filters ---
