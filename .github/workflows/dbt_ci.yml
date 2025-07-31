@@ -1,0 +1,60 @@
+name: dbt CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.9' # Using 3.9 for broader compatibility
+
+    - name: Install dbt and dbt-duckdb
+      run: |
+        pip install dbt-duckdb
+
+    - name: Install DVC
+      run: |
+        pip install dvc
+
+    - name: Configure dbt profiles.yml
+      run: |
+        mkdir -p ~/.dbt
+        echo "${{ secrets.DBT_PROFILES_YML }}" > ~/.dbt/profiles.yml
+      env:
+        DBT_PROFILES_YML: |
+          icu_dashboard:
+            target: dev
+            outputs:
+              dev:
+                type: duckdb
+                path: icu_dbt_project/icu_dashboard.duckdb # Relative path within the project
+
+    - name: DVC Pull Data
+      run: |
+        dvc pull
+      working-directory: icu_dbt_project # Assuming dvc pull needs to be run from the dbt project root
+
+    - name: Run dbt Seed
+      run: |
+        dbt seed
+      working-directory: icu_dbt_project
+
+    - name: Run dbt Models
+      run: |
+        dbt run
+      working-directory: icu_dbt_project
+
+    - name: Run dbt Tests
+      run: |
+        dbt test
+      working-directory: icu_dbt_project
