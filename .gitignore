@@ -6,7 +6,8 @@ __pycache__/
 *.pyc
 
 # Data folder
-data/
+data/*
+!data/*.dvc
 
 # IDE and editor folders
 .vscode/
