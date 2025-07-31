@@ -1,0 +1,21 @@
+name: 'icu_dbt_project'
+version: '1.0.0'
+config-version: 2
+
+profile: 'icu_dashboard'
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+macro-paths: ["macros"]
+seed-paths: ["seeds"]
+test-paths: ["tests"]
+
+target-path: "target"  # directory which will store compiled SQL files
+clean-targets:
+  - "target"
+  - "dbt_packages"
+  - "dbt_modules"
+
+models:
+  icu_dbt_project:
+    +materialized: view

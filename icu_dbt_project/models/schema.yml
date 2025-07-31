@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: main
+    database: icu_dashboard.duckdb # This should match the 'database' in your profiles.yml
+    schema: main # This should match the 'schema' in your profiles.yml
+    tables:
+      - name: icu_data
