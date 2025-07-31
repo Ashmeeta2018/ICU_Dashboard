@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICU Dashboard</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+    <div class="dashboard-container">
+        <header class="header">
+            <div class="header-left">
+                <div class="logo">ICU</div>
+                <div class="title">Critical Care Medicine - Operations Dashboard</div>
+            </div>
+            <div class="header-right">
+                <div class="last-updated">Last Updated: <span id="last-updated-time"></span></div>
+                <div class="filters">
+                    <select id="date-range-filter">
+                        <option>Last 7 Days</option>
+                        <option selected>Last 30 Days</option>
+                    </select>
+                    <select id="unit-filter">
+                        <option>All ICU Units</option>
+                        <option>MICU</option>
+                        <option>SICU</option>
+                        <option>CVICU</option>
+                    </select>
+                    <button id="reset-filters-btn">Reset Chart Filters</button>
+                </div>
+            </div>
+        </header>
+
+        <section class="kpi-section">
+            <div class="kpi-card">
+                <div class="title">Current Bed Occupancy</div>
+                <div class="value" id="bed-occupancy">...</div>
+            </div>
+            <div class="kpi-card">
+                <div class="title">Total Patient Census</div>
+                <div class="value" id="patient-census">...</div>
+            </div>
+            <div class="kpi-card">
+                <div class="title">Ventilator Utilization</div>
+                <div class="value" id="ventilator-utilization">...</div>
+            </div>
+            <div class="kpi-card">
+                <div class="title">Avg. Length of Stay (Days)</div>
+                <div class="value" id="avg-los">...</div>
+            </div>
+        </section>
+
+        <main class="main-vis">
+            <div class="chart-container">
+                <div class="title">Patient Census & Bed Availability Over Time</div>
+                <canvas id="census-chart"></canvas>
+            </div>
+        </main>
+
+        <aside class="right-column">
+            <div class="chart-container">
+                <div class="title">Patient Acuity Levels</div>
+                <canvas id="acuity-chart"></canvas>
+            </div>
+            <div class="chart-container">
+                <div class="title">Admission Source</div>
+                <canvas id="admission-chart"></canvas>
+            </div>
+        </aside>
+
+        <footer class="data-table">
+            <div class="title">Patient Details</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Patient ID</th>
+                        <th>Unit</th>
+                        <th>Length of Stay (Days)</th>
+                        <th>Acuity Level</th>
+                        <th>Ventilator Status</th>
+                    </tr>
+                </thead>
+                <tbody id="patient-details-body">
+                </tbody>
+            </table>
+        </footer>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/static/js/script.js"></script>
+</body>
+</html>
